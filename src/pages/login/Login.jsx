@@ -1,7 +1,17 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { loginFormSchema } from "../../lib/validation/loginValidation";
 export default function Login() {
+  const { register, handleSubmit } = useForm({
+    resolver: zodResolver(loginFormSchema),
+  });
+
+  function onSubmit(data) {
+    console.log(data);
+  }
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -10,15 +20,19 @@ export default function Login() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              className="space-y-4 md:space-y-6"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div>
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Your email
                 </label>
                 <input
+                  {...register("email")}
                   type="email"
                   name="email"
                   id="email"
@@ -29,12 +43,13 @@ export default function Login() {
               </div>
               <div>
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Password
                 </label>
                 <input
+                  {...register("password")}
                   type="password"
                   name="password"
                   id="password"
@@ -56,19 +71,19 @@ export default function Login() {
                   </div>
                   <div className="ml-3 text-sm">
                     <label
-                      for="remember"
+                      htmlFor="remember"
                       className="text-gray-500 dark:text-gray-300"
                     >
                       Remember me
                     </label>
                   </div>
                 </div>
-                <a
-                  href="#"
+                <Link
+                  to=""
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
               <button
                 type="submit"
