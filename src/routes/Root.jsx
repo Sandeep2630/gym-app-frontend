@@ -1,10 +1,17 @@
-import { useRootContext } from "../hooks/context/useRootContext";
+import { Link, Outlet } from "react-router-dom";
+import Sidebar from "../components/sidebar/Sidebar";
 
 export default function Root() {
-  const {color , setColor} = useRootContext()
   return (
     <>
- <button onClick={() =>setColor(prev => (prev == 'red' ? 'black' : 'red'))}>{color}</button> 
+      <div className="flex ">
+        <div>
+          <Sidebar />
+        </div>
+        <div>
+          <Outlet />
+        </div>
+      </div>
     </>
   );
 }
