@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { loginFormSchema } from "../../lib/validation/loginValidation";
 export default function Login() {
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(loginFormSchema),
   });
 
@@ -26,20 +30,25 @@ export default function Login() {
             >
               <div>
                 <label
-                  // htmlFor="email"
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Your email
                 </label>
                 <input
                   {...register("email")}
-                  // type="email"
-                  // name="email"
-                  // id="email"
+                  type="email"
+                  name="email"
+                  id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                   required=""
                 />
+                {errors.email && (
+                  <span className="text-red-800 block mt-2">
+                    {errors.email?.message}
+                  </span>
+                )}
               </div>
               <div>
                 <label
@@ -57,6 +66,11 @@ export default function Login() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
                 />
+                {errors.password && (
+                  <span className="text-red-800 block mt-2">
+                    {errors.password?.message}
+                  </span>
+                )}
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
@@ -67,7 +81,7 @@ export default function Login() {
                       type="checkbox"
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                       required=""
-                    />
+                    />{" "}
                   </div>
                   <div className="ml-3 text-sm">
                     <label
