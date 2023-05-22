@@ -9,6 +9,8 @@ export default {
   theme: {
     extend: {
       colors: {
+        "dark-purple": "#081A51",
+        "light-while": "rgba(255,255,255,0.18)",
         primary: {
           50: "#eff6ff",
           100: "#dbeafe",

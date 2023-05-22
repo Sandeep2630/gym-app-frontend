@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import Sidebar from "../components/sidebar/Sidebar";
+import Sidebar from "../components/sidebar";
 
 export default function Root() {
   return (
@@ -9,6 +9,7 @@ export default function Root() {
           <Sidebar />
         </div>
         <div>
+          <div>Top Navbar</div>
           <Outlet />
         </div>
       </div>
